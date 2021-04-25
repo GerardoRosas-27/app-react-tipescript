@@ -1,26 +1,26 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { ListaPerson } from "../../models/PersonDTO";
 import { IState } from "../../models/stateDTO";
 
 export default class FormPerson extends Component<IState> {
 
     state: ListaPerson = {}
-    enviarForm = (e: React.FormEvent<HTMLFormElement>) =>{
+    enviarForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { usuario, onGuardarUsuario, onActualizarUsuario } = this.props;
         console.log(e);
-        if(usuario?._id){
+        if (usuario?._id) {
             //actualizando usuario
             onActualizarUsuario(usuario._id, this.state)
-        }else{
+        } else {
             //guardando nuevo usuario
             console.log('entro mandar a guardar usuario:', this.state)
             onGuardarUsuario(this.state);
         }
-        this.state = {}
+        this.setState({});
     }
 
-    cambioText = ( input: React.ChangeEvent<HTMLInputElement> ) =>{
+    cambioText = (input: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             [input.target.name]: input.target.value
         })
